@@ -38,8 +38,8 @@ class ProjectsController extends Controller
             'description' => 'required',
         ]);
 
-        $user->projects()->create($attributes);
+        $project = $user->projects()->create($attributes);
 
-        return redirect('/projects');
+        return redirect($project->path());
     }
 }
