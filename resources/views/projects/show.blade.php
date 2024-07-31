@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <header class="flex items-center mb-3 py-4">
+    <header class="flex items-center mb-3 pb-4">
         <div class="flex justify-between items-end w-full">
             <p class="text-grey text-sm font-normal">
                 <a href="/projects" class="text-grey text-sm font-normal no-underline">My Projects</a> / {{ $project->title }}
@@ -43,7 +43,16 @@
 
                 <div>
                     <h2 class="text-lg text-grey font-normal mb-3">General Notes</h2>
-                    <textarea class="card w-full" style="min-height: 200px"></textarea>
+
+                    <form action="{{ $project->path() }}" method="POST">
+                        @method('PATCH')
+                        @csrf
+
+                        <textarea name="notes" class="card w-full mb-4" style="min-height: 200px"
+                            placeholder="Anything special that you want to make a note off?">{{ $project->notes }}</textarea>
+
+                        <button type="submit" class="button">Save</button>
+                    </form>
                 </div>
             </div>
 
