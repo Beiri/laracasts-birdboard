@@ -7,6 +7,7 @@ This project was created by following the **Build A Laravel App With TDD** cours
 -   [**PHP**](https://www.php.net/)
 -   [**Laravel**](https://laravel.com/)
 -   [**PHPUnit**](https://phpunit.de/index.html)
+-   [**Tailwind CSS**](https://tailwindcss.com/)
 
 ### Project Description
 
