@@ -36,14 +36,14 @@ trait RecordsActivity
     }
 
     /**
-     * Record activity for a project.
+     * Record activity.
      *
-     * @param string $type
-     * @param \App\Project $project
+     * @param string $description
      */
     public function recordActivity($description)
     {
         $this->activity()->create([
+            'user_id' => ($this->project ?? $this)->owner->id,
             'description' => $description,
             'changes' => $this->activityChanges(),
             'project_id' => class_parents($this) === 'Project' ? $this->id : $this->project_id,
@@ -51,7 +51,7 @@ trait RecordsActivity
     }
 
     /**
-     * The activity feed for the task.
+     * The activity feed.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
