@@ -8,20 +8,31 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class InvitationTest extends TestCase
+class InvitationsTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
     function non_owners_may_not_invite_users()
     {
-        $this->actingAs(factory(User::class)->create())
-            ->post(ProjectFactory::create()->path() . '/invitations')
-            ->assertStatus(403);
+        $project = ProjectFactory::create();
+        $user = factory(User::class)->create();
+
+        $assertInvitationForbidden = function () use ($user, $project) {
+            $this->actingAs($user)
+                ->post($project->path() . '/invitations')
+                ->assertStatus(403);
+        };
+
+        $assertInvitationForbidden();
+
+        $project->invite($user);
+
+        $assertInvitationForbidden();
     }
 
     /** @test */
-    function a_project_owner_can_inivite_a_user()
+    function a_project_owner_can_invite_a_user()
     {
         $project = ProjectFactory::create();
 
@@ -45,7 +56,7 @@ class InvitationTest extends TestCase
             ->post($project->path() . '/invitations', [
                 'email' => 'notauser@example.com',
             ])
-            ->assertSessionHasErrors(['email' => 'The user you are inviting must have a Birdboard account.']);
+            ->assertSessionHasErrors(['email' => 'The user you are inviting must have a Birdboard account.'], null, 'invitations');
     }
 
     /** @test */
