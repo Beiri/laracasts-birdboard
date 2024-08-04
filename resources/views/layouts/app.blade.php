@@ -50,7 +50,7 @@
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <img width="50" class="rounded-full"
-                                            src="https://www.gravatar.com/avatar/{{ md5(auth()->user()->email) }}?s=200">
+                                            src="{{ gravatar_url(auth()->user()->email) }}">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
@@ -70,9 +70,11 @@
             </div>
         </nav>
 
-        <main class="container mx-auto py-6">
-            @yield('content')
-        </main>
+        <div class="section">
+            <main class="container mx-auto py-6">
+                @yield('content')
+            </main>
+        </div>
     </div>
 </body>
 
