@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <header class="flex items-center mb-3 pb-4">
+    <header class="flex items-center mb-6 pb-4">
         <div class="flex justify-between items-end w-full">
-            <p class="text-grey text-sm font-normal">
-                <a href="/projects" class="text-grey text-sm font-normal no-underline">My Projects</a> / {{ $project->title }}
+            <p class="text-muted font-light">
+                <a href="/projects" class="text-muted text-sm font-normal no-underline">My Projects</a> /
+                {{ $project->title }}
             </p>
 
             <div class="flex items-center">
@@ -25,7 +26,7 @@
         <div class="lg:flex -mx-3">
             <div class="lg:w-3/4 px-3 mb-8">
                 <div class="mb-6">
-                    <h2 class="text-lg text-grey font-normal mb-3">Tasks</h2>
+                    <h2 class="text-lg text-muted font-light mb-3">Tasks</h2>
 
                     @foreach ($project->tasks as $task)
                         <div class="card mb-3">
@@ -34,7 +35,8 @@
                                 @csrf
 
                                 <div class="flex items-center">
-                                    <input type="text" class="w-full {{ $task->completed ? 'text-grey' : '' }}"
+                                    <input type="text"
+                                        class="w-full bg-card text-default {{ $task->completed ? 'line-through text-muted' : '' }}"
                                         name="body" value="{{ $task->body }}">
                                     <input type="checkbox" name="completed" onchange="this.form.submit()"
                                         {{ $task->completed ? 'checked' : '' }}>
@@ -46,19 +48,20 @@
                         <form action="{{ $project->path() . '/tasks' }}" method="POST">
                             @csrf
 
-                            <input type="text" placeholder="Add a new task" class="w-full" name="body">
+                            <input type="text" placeholder="Add a new task" class="w-full bg-card text-default"
+                                name="body">
                         </form>
                     </div>
                 </div>
 
                 <div>
-                    <h2 class="text-lg text-grey font-normal mb-3">General Notes</h2>
+                    <h2 class="text-lg text-muted font-light mb-3">General Notes</h2>
 
                     <form action="{{ $project->path() }}" method="POST">
                         @method('PATCH')
                         @csrf
 
-                        <textarea name="notes" class="card w-full mb-4" style="min-height: 200px"
+                        <textarea name="notes" class="card text-default w-full mb-4" style="min-height: 200px"
                             placeholder="Anything special that you want to make a note off?">{{ $project->notes }}</textarea>
 
                         <button type="submit" class="button">Save</button>
