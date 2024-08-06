@@ -67,11 +67,15 @@
                             class="border border-muted-light mb-2 p-2 text-xs block w-full rounded"
                             placeholder="Task 1"
                             v-for="task in form.tasks"
-                            v-model="task.value"
+                            v-model="task.body"
                         />
                     </div>
 
-                    <button class="inline-flex items-center" @click="addTask">
+                    <button
+                        type="button"
+                        class="inline-flex items-center"
+                        @click="addTask"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="18"
@@ -100,6 +104,7 @@
 
             <footer class="flex justify-end">
                 <button
+                    type="button"
                     class="button is-outlined mr-4"
                     @click="$modal.hide('new-project')"
                 >
@@ -120,7 +125,7 @@ export default {
                 description: "",
                 tasks: [
                     {
-                        value: "",
+                        body: "",
                     },
                 ],
             },
@@ -131,7 +136,7 @@ export default {
 
     methods: {
         addTask() {
-            this.form.tasks.push({ value: "" });
+            this.form.tasks.push({ body: "" });
         },
 
         async submit() {

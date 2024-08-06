@@ -8,6 +8,7 @@ This project was created by following the **Build A Laravel App With TDD** cours
 -   [**Laravel**](https://laravel.com/)
 -   [**PHPUnit**](https://phpunit.de/index.html)
 -   [**Tailwind CSS**](https://tailwindcss.com/)
+-   [**Vue.js**](https://vuejs.org/)
 
 ### Project Description
 
